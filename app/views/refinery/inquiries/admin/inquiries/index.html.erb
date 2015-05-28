@@ -1,12 +1,19 @@
-<%= render "submenu" %>
-<div id='records'>
+<% content_for :subnav do %>
+  <%= render "submenu" %>
+<% end %>
+
+<%= render "/refinery/admin/search", :url => request.path.gsub("//", "/") %>
+
+<div id='records' class="ui segments">
   <% if searching? %>
     <%= render 'refinery/admin/search_header', :url => request.path.gsub("//", "/") %>
     <% if @inquiries.any? %>
       <%= will_paginate @inquiries %>
-      <ul>
-        <%= render :partial => "inquiry", :collection => @inquiries %>
-      </ul>
+      <div class="ui segment">
+        <ul>
+          <%= render :partial => "inquiry", :collection => @inquiries %>
+        </ul>
+      </div>
       <%= will_paginate @inquiries %>
     <% else %>
       <p><%= t('refinery.admin.search.no_results') %></p>
@@ -14,12 +21,14 @@
   <% else %>
     <% if @inquiries.any? -%>
       <%= will_paginate @inquiries %>
-      <% group_by_date(@inquiries).each do |container| %>
-        <h3><%= l((inquiry_group = container.last).first.created_at, :format => :short) %></h3>
-        <ul>
-          <%= render :partial => 'inquiry', :collection => inquiry_group %>
-        </ul>
-      <% end %>
+      <div class="ui segment">
+        <% group_by_date(@inquiries).each do |container| %>
+          <h3><%= l((inquiry_group = container.last).first.created_at, :format => :short) %></h3>
+          <ul>
+            <%= render :partial => 'inquiry', :collection => inquiry_group %>
+          </ul>
+        <% end %>
+      </div>
       <%= will_paginate @inquiries %>
     <% else -%>
       <p>
