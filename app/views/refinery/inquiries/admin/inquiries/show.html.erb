@@ -1,33 +1,36 @@
-<div id='actions'>
-  <h2><%= t('.details')%></h2>
-  <p>
-    <strong><%= t('.age') %>:</strong> <%= time_ago_in_words(@inquiry.created_at) %>
-  </p>
-  <% if @inquiry.spam? %>
+<div class="ui segment">
+  <div>
+    <h2><%= t('.details')%></h2>
     <p>
-      <strong><%= t('.spam') %>:</strong> <%= t('.spam_yes') %>
+      <strong><%= t('.age') %>:</strong> <%= time_ago_in_words(@inquiry.created_at) %>
     </p>
-  <% end %>
-  <h2><%= t('.actions') %></h2>
-  <ul>
-    <li>
-      <%= link_to t('.back_to_all_inquiries'),
-                  refinery.inquiries_admin_inquiries_path,
-                  :class => "back_icon" %>
-    </li>
-    <li>
-      <%= link_to t('refinery.inquiries.admin.inquiries.delete'),
-                  refinery.inquiries_admin_inquiry_path(@inquiry),
-                  :class => 'delete_icon no-tooltip confirm-delete',
-                  :title => t('refinery.inquiries.admin.inquiries.delete'),
-                  :data => {
-                    :confirm => t('refinery.admin.delete.message', :title => @inquiry.name)
-                  },
-                  :method => :delete %>
-    </li>
-  </ul>
+    <% if @inquiry.spam? %>
+      <p>
+        <strong><%= t('.spam') %>:</strong> <%= t('.spam_yes') %>
+      </p>
+    <% end %>
+    <h2><%= t('.actions') %></h2>
+    <ul>
+      <li>
+        <%= link_to t('.back_to_all_inquiries'),
+                    refinery.inquiries_admin_inquiries_path,
+                    :class => "back_icon" %>
+      </li>
+      <li>
+        <%= link_to t('refinery.inquiries.admin.inquiries.delete'),
+                    refinery.inquiries_admin_inquiry_path(@inquiry),
+                    :class => 'delete_icon no-tooltip confirm-delete',
+                    :title => t('refinery.inquiries.admin.inquiries.delete'),
+                    :data => {
+                      :confirm => t('refinery.admin.delete.message', :title => @inquiry.name)
+                    },
+                    :method => :delete %>
+      </li>
+    </ul>
+  </div>
 </div>
-<div id='records'>
+
+<div id='records' class="ui segment">
   <h2><%= t('.inquiry') %></h2>
   <table id='inquiry'>
     <tr>
